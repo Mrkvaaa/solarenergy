@@ -12,13 +12,9 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         main {
-            flex: 1;
             padding-bottom: 60px; /* Height of footer */
         }
 
@@ -29,7 +25,8 @@
             padding: 15px 0;
             width: 100%;
             margin-top: auto;
-            position: relative;
+            position: fixed;
+            bottom: 0;
             z-index: 10;
         }
 
@@ -117,9 +114,10 @@ section:not(#home) {
             background-color: #333;
             color: white;
             text-align: center;
-            position: static; /* Změna z fixed na static */
-            width: 99,9%;
-            padding: 0.5rem; /* Zvýšení paddingu */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
             font-size: 0.8rem;
             margin-top: 40px; /* Přidání mezery nad footerem */
         }
