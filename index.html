@@ -12,15 +12,31 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        header {
-            background-color: #28a745; /* Zelená barva pro ekologickou téma */
-            color: white;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        main {
+            flex: 1;
+            padding-bottom: 60px; /* Height of footer */
         }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            width: 100%;
+            margin-top: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        section {
+            margin-bottom: 20px; /* Add space before footer */
+        }
+
         @media (max-width: 768px) {
     nav {
         display: flex;
@@ -66,11 +82,19 @@
         }
         section {
     transition: opacity 0.3s ease-in-out;
-    opacity: 0;
+    opacity: 1; /* Changed from 0 */
+    padding: 40px;
+    margin: 20px auto;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: block; /* Changed from none */
 }
 
-section.visible {
-    opacity: 1;
+/* Hide all sections except home initially */
+section:not(#home) {
+    display: none;
 }
 
 .fade-in {
@@ -216,6 +240,7 @@ section.visible {
     justify-content: center; /* Zarovnání obrázků do středu */
     gap: 20px; /* Mezera mezi obrázky */
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .about-images img {
@@ -332,6 +357,88 @@ section.visible {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.contact-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+    outline: none;
+}
+
+.submit-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.notification {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    display: none;
+}
+
+.notification.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.notification.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
@@ -351,111 +458,113 @@ section.visible {
     </nav>
 </header>
 
-<!-- Sekce Úvod (Home) -->
-<section id="home" class="fade-in">
-    <div class="hero">
-        <h2>Vítejte na stránkách SolarEnergy</h2>
-        <p>Pomáháme vám přejít na zelenou energii! Snižte své náklady na elektřinu a přispějte k ochraně životního prostředí s našimi inovativními solárními řešeními.</p>
-        <button class="button-more" onclick="showSection('services')">Zjistit více</button>
-    </div>
-</section>
-
-<!-- Sekce O nás -->
-<section id="about" class="fade-in">
-    <h2>O nás</h2>
-    <p>SolarEnergy je firma se sídlem v <strong>Lounech</strong>, která se může pochlubit dlouholetou tradicí na trhu obnovitelné energie. Naše firma vznikla s cílem poskytovat kvalitní a inovativní solární energetická řešení pro domácnosti a firmy. Během let jsme získali cenné zkušenosti a stali se lídrem v oblasti solárních technologií v regionu.</p>
-    <p>Naším cílem je nejen pomáhat našim zákazníkům ušetřit na nákladech za energie, ale také aktivně přispívat k ochraně životního prostředí. S využitím moderních solárních panelů a inovativních energetických řešení nabízíme širokou škálu služeb od instalace po komplexní poradenství a servis.</p>
-    <p>SolarEnergy je synonymem pro kvalitu, spolehlivost a udržitelnost. Naše hodnoty jsou založeny na týmové spolupráci, otevřené komunikaci a neustálém vzdělávání, což nám umožňuje neustále zlepšovat naše služby a přinášet inovace do solární energetiky.</p>
-<div class="about-images">
-    <img src="https://www.mulouny.cz/galerie/5285_500_375.jpg" alt="Obrázek 1">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScmTHcEu8x_S72gNA4nS2JgQAu92qqhZkxGw&s" alt="Obrázek 2">
-    <img src="https://cdn.prod.website-files.com/5fd2268bbc319b0af7e78509/65fad207d28488ce043a025d_PENB-stitek-expirace.webp" alt="Obrázek 3">
-</div>
-</section>
-
-<!-- Sekce Služby -->
-<section id="services" class="fade-in">
-    <h2>Naše Služby</h2>
-    <ul class="service-list">
-        <li><strong>Návrh a instalace solárních systémů</strong> - Komplexní řešení pro rodinné domy, včetně instalace a projektování.</li>
-        <li><strong>Komplexní energetické poradenství</strong> - Poskytujeme individuální audit a poradenství pro optimalizaci spotřeby.</li>
-        <li><strong>Prodej solárních panelů a příslušenství</strong> - Nabízíme kvalitní solární panely a veškeré příslušenství pro domácí i komerční instalace.</li>
-        <li><strong>Údržba a servis solárních systémů</strong> - Pravidelný servis a monitoring pro dlouhodobou funkčnost vašeho systému.</li>
-    </ul>
-
-    <!-- Obrázky -->
-    <div style="display: flex; justify-content: space-around; margin-top: 30px; flex-wrap: wrap;">
-        <img src="https://www.labona.cz/www/upload/Fotky%20k%20text%C5%AFm/FVE/Toky%20energie%20ve%20FVE%20r%C3%A1no%20RGB%20(1).jpg" alt="Služba 1" style="max-width: 150px; border-radius: 8px;">
-        <img src="https://www.elektroprumysl.cz/images/stories/Kategorie/Merici_technika/termokamery/FVE-termodiagnostika-2022-2.jpg" alt="Služba 2" style="max-width: 150px; border-radius: 8px;">
-        <img src="https://cdn.solar-eshop.cz/files/photos/1600-1200/1/13acb3574f2cbee83b601832f93091d27889aade.jpg" alt="Služba 3" style="max-width: 150px; border-radius: 8px;">
-        <img src="https://www.energosolar.cz/wp-content/uploads/2023/06/Jak-na-udrzbu-solarnich-panelu-Jak-se-cisti-fotovoltaicke-panely.jpg" alt="Služba 4" style="max-width: 150px; border-radius: 8px;">
-    </div>
-</section>
-
-<!-- Sekce E-shop -->
-<section id="shop" class="fade-in">
-    <h2>Nabídka</h2>
-    
-    <div class="product-card" style="display: flex; align-items: center; margin-bottom: 20px;">
-        <img src="https://www.gmenergy.cz/img/leoblog/b/1/1/lg-b-blog-clanek_new.jpg" alt="Rezidenční solární systém" style="max-width: 200px; height: auto; border-radius: 8px; margin-right: 20px;">
-        <div>
-            <h3>Rezidenční solární systémy</h3>
-            <p>Kompletní řešení včetně montáže a projektové dokumentace. Cena: 250 000 - 500 000 Kč (Cena se odvíjí podle požadavků)</p>
-            <button class="button" onclick="showSection('contact')">Kontaktujte nás</button>
+<main>
+    <!-- Sekce Úvod (Home) -->
+    <section id="home" class="fade-in">
+        <div class="hero">
+            <h2>Vítejte na stránkách SolarEnergy</h2>
+            <p>Pomáháme vám přejít na zelenou energii! Snižte své náklady na elektřinu a přispějte k ochraně životního prostředí s našimi inovativními solárními řešeními.</p>
+            <button class="button-more" onclick="showSection('services')">Zjistit více</button>
         </div>
-    </div>
+    </section>
 
-    <div class="product-card" style="display: flex; align-items: center; margin-bottom: 20px;">
-        <img src="https://h2-energy.cz/images/vyber-baterie-pro-solar.webp" alt="Solární konzultace" style="max-width: 200px; height: auto; border-radius: 8px; margin-right: 20px;">
-        <div>
-            <h3>Solární konzultace</h3>
-            <p>Individuální energetický audit. Cena: 2 000 - 5 000 Kč</p>
-            <button class="button" onclick="showSection('contact')">Kontaktujte nás</button>
-        </div>
+    <!-- Sekce O nás -->
+    <section id="about" class="fade-in">
+        <h2>O nás</h2>
+        <p>SolarEnergy je firma se sídlem v <strong>Lounech</strong>, která se může pochlubit dlouholetou tradicí na trhu obnovitelné energie. Naše firma vznikla s cílem poskytovat kvalitní a inovativní solární energetická řešení pro domácnosti a firmy. Během let jsme získali cenné zkušenosti a stali se lídrem v oblasti solárních technologií v regionu.</p>
+        <p>Naším cílem je nejen pomáhat našim zákazníkům ušetřit na nákladech za energie, ale také aktivně přispívat k ochraně životního prostředí. S využitím moderních solárních panelů a inovativních energetických řešení nabízíme širokou škálu služeb od instalace po komplexní poradenství a servis.</p>
+        <p>SolarEnergy je synonymem pro kvalitu, spolehlivost a udržitelnost. Naše hodnoty jsou založeny na týmové spolupráci, otevřené komunikaci a neustálém vzdělávání, což nám umožňuje neustále zlepšovat naše služby a přinášet inovace do solární energetiky.</p>
+    <div class="about-images">
+        <img src="https://www.mulouny.cz/galerie/5285_500_375.jpg" alt="Obrázek 1">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScmTHcEu8x_S72gNA4nS2JgQAu92qqhZkxGw&s" alt="Obrázek 2">
+        <img src="https://cdn.prod.website-files.com/5fd2268bbc319b0af7e78509/65fad207d28488ce043a025d_PENB-stitek-expirace.webp" alt="Obrázek 3">
     </div>
+    </section>
 
-    <div class="product-card" style="display: flex; align-items: center; margin-bottom: 20px;">
-        <img src="https://js.pencdn.cz/acimage/275132.jpg" alt="Servisní balíček" style="max-width: 200px; height: auto; border-radius: 8px; margin-right: 20px;">
-        <div>
-            <h3>Servisní balíčky</h3>
-            <p>Pravidelná údržba a monitoring. Cena: 10 000 - 20 000 Kč ročně</p>
-            <button class="button" onclick="showSection('contact')">Kontaktujte nás</button>
+    <!-- Sekce Služby -->
+    <section id="services" class="fade-in">
+        <h2>Naše Služby</h2>
+        <ul class="service-list">
+            <li><strong>Návrh a instalace solárních systémů</strong> - Komplexní řešení pro rodinné domy, včetně instalace a projektování.</li>
+            <li><strong>Komplexní energetické poradenství</strong> - Poskytujeme individuální audit a poradenství pro optimalizaci spotřeby.</li>
+            <li><strong>Prodej solárních panelů a příslušenství</strong> - Nabízíme kvalitní solární panely a veškeré příslušenství pro domácí i komerční instalace.</li>
+            <li><strong>Údržba a servis solárních systémů</strong> - Pravidelný servis a monitoring pro dlouhodobou funkčnost vašeho systému.</li>
+        </ul>
+
+        <!-- Obrázky -->
+        <div style="display: flex; justify-content: space-around; margin-top: 30px; flex-wrap: wrap; margin-bottom: 30px;">
+            <img src="https://www.labona.cz/www/upload/Fotky%20k%20text%C5%AFm/FVE/Toky%20energie%20ve%20FVE%20r%C3%A1no%20RGB%20(1).jpg" alt="Služba 1" style="max-width: 150px; border-radius: 8px;">
+            <img src="https://www.elektroprumysl.cz/images/stories/Kategorie/Merici_technika/termokamery/FVE-termodiagnostika-2022-2.jpg" alt="Služba 2" style="max-width: 150px; border-radius: 8px;">
+            <img src="https://cdn.solar-eshop.cz/files/photos/1600-1200/1/13acb3574f2cbee83b601832f93091d27889aade.jpg" alt="Služba 3" style="max-width: 150px; border-radius: 8px;">
+            <img src="https://www.energosolar.cz/wp-content/uploads/2023/06/Jak-na-udrzbu-solarnich-panelu-Jak-se-cisti-fotovoltaicke-panely.jpg" alt="Služba 4" style="max-width: 150px; border-radius: 8px;">
         </div>
-    </div>
-</section>
-<!-- Sekce Kontakt -->
-<section id="contact" class="fade-in">
-    <h2>Kontaktujte nás</h2>
-    <p>Máte zájem o naše služby nebo máte otázky? Rádi vám pomůžeme!</p>
-    <p><strong>Vedoucí managemantu: </strong>Jakub Mrkvík - +420 123 456 789 ; <strong>Vedoucí technik: </strong>Matěj Merhaut - +420 987 654 321</p>
-    <p>Email: <strong><a href="mailto:mrkvikj@seznam.cz">mrkvikj@seznam.cz</a></strong></p>
-    
-    <h3>Vyplňte dotazník pro více informací</h3>
-    <div class="notification" id="notification"></div>
-    <form id="contactForm" class="contact-form">
-        <div class="form-group">
-            <label for="name">Jméno:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
+    </section>
+
+    <!-- Sekce E-shop -->
+    <section id="shop" class="fade-in">
+        <h2>Nabídka</h2>
         
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <div class="product-card" style="display: flex; align-items: center; margin-bottom: 30px;">
+            <img src="https://www.gmenergy.cz/img/leoblog/b/1/1/lg-b-blog-clanek_new.jpg" alt="Rezidenční solární systém" style="max-width: 200px; height: auto; border-radius: 8px; margin-right: 20px;">
+            <div>
+                <h3>Rezidenční solární systémy</h3>
+                <p>Kompletní řešení včetně montáže a projektové dokumentace. Cena: 250 000 - 500 000 Kč (Cena se odvíjí podle požadavků)</p>
+                <button class="button" onclick="showSection('contact')">Kontaktujte nás</button>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="subject">Předmět:</label>
-            <input type="text" id="subject" name="subject" required>
+        <div class="product-card" style="display: flex; align-items: center; margin-bottom: 30px;">
+            <img src="https://h2-energy.cz/images/vyber-baterie-pro-solar.webp" alt="Solární konzultace" style="max-width: 200px; height: auto; border-radius: 8px; margin-right: 20px;">
+            <div>
+                <h3>Solární konzultace</h3>
+                <p>Individuální energetický audit. Cena: 2 000 - 5 000 Kč</p>
+                <button class="button" onclick="showSection('contact')">Kontaktujte nás</button>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="message">Zpráva:</label>
-            <textarea id="message" name="message" rows="6" required></textarea>
+        <div class="product-card" style="display: flex; align-items: center; margin-bottom: 30px;">
+            <img src="https://js.pencdn.cz/acimage/275132.jpg" alt="Servisní balíček" style="max-width: 200px; height: auto; border-radius: 8px; margin-right: 20px;">
+            <div>
+                <h3>Servisní balíčky</h3>
+                <p>Pravidelná údržba a monitoring. Cena: 10 000 - 20 000 Kč ročně</p>
+                <button class="button" onclick="showSection('contact')">Kontaktujte nás</button>
+            </div>
         </div>
+    </section>
+    <!-- Sekce Kontakt -->
+    <section id="contact" class="fade-in">
+        <h2>Kontaktujte nás</h2>
+        <p>Máte zájem o naše služby nebo máte otázky? Rádi vám pomůžeme!</p>
+        <p><strong>Vedoucí managemantu: </strong>Jakub Mrkvík - +420 123 456 789 ; <strong>Vedoucí technik: </strong>Matěj Merhaut - +420 987 654 321</p>
+        <p>Email: <strong><a href="mailto:mrkvikj@seznam.cz">mrkvikj@seznam.cz</a></strong></p>
+        
+        <h3>Vyplňte dotazník pro více informací</h3>
+        <div class="notification" id="notification"></div>
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label for="name">Jméno:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
 
-        <button type="submit" class="submit-btn" id="submitBtn">Odeslat zprávu</button>
-    </form>
-</section>
+            <div class="form-group">
+                <label for="subject">Předmět:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Zpráva:</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">Odeslat zprávu</button>
+        </form>
+    </section>
+</main>
 
 <footer>
     <p>© 2024 SolarEnergy. Všechna práva vyhrazena.</p>
@@ -464,84 +573,63 @@ section.visible {
 
 <script>
 function showSection(sectionId) {
+    // Hide all sections
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         section.style.display = 'none';
         section.style.opacity = 0;
     });
 
+    // Show selected section
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
         selectedSection.style.display = 'block';
         setTimeout(() => {
             selectedSection.style.opacity = 1;
         }, 10);
-        
-        // Smooth scroll
-        selectedSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
-// Add this to your script section
-document.querySelector('#contact form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    
-    if (validateForm(name, email, subject, message)) {
-        alert('Formulář byl úspěšně odeslán!');
-        this.reset();
-    }
-});
 
-function validateForm(name, email, subject, message) {
-    if (!name || !email || !subject || !message) {
-        alert('Prosím vyplňte všechna pole.');
-        return false;
-    }
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Prosím zadejte platnou emailovou adresu.');
-        return false;
-    }
-    
-    return true;
-}
+// Show home section on page load
+document.addEventListener('DOMContentLoaded', function() {
+    showSection('home');
+});
 </script>
 <script>
     // Initialize EmailJS
     (function() {
-        emailjs.init("nVsAn74m4SlEWT8vk"); // Sign up at emailjs.com and get your public key
+        emailjs.init("nVsAn74m4SlEWT8vk");
     })();
 
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const templateParams = {
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Odesílání...';
+
+        // Get form values
+        const formData = {
             from_name: document.getElementById('name').value,
-            from_email: document.getElementById('email').value,
+            reply_to: document.getElementById('email').value,
             subject: document.getElementById('subject').value,
             message: document.getElementById('message').value,
-            to_email: 'mrkvikj@seznam.cz'
+            to_name: 'SolarEnergy'
         };
 
-        emailjs.send('service_t7uluad', 'template_ixiujrw', templateParams)
-            .then(function(response) {
+        // Send email
+        emailjs.send('service_t7uluad', 'template_ixiujrw', formData)
+            .then(() => {
                 showNotification('Zpráva byla úspěšně odeslána!', 'success');
                 document.getElementById('contactForm').reset();
             })
-            .catch(function(error) {
+            .catch((error) => {
+                console.error('EmailJS Error:', error);
                 showNotification('Došlo k chybě při odesílání. Zkuste to prosím později.', 'error');
-                console.error('Error:', error);
             })
-            .finally(function() {
-                const submitBtn = document.getElementById('submitBtn');
-                submitBtn.classList.remove('loading');
-                submitBtn.textContent = 'Odeslat zprávu';
+            .finally(() => {
                 submitBtn.disabled = false;
+                submitBtn.textContent = 'Odeslat zprávu';
             });
     });
 
